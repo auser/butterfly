@@ -1,10 +1,10 @@
-= butterfly
+= Butterfly
 
 http://blog.xnot.org
 
 == DESCRIPTION:
 
-A modular HTTP mini server to query against adaptors
+An HTTP mini server to query against modular adaptors
 
 == FEATURES/PROBLEMS:
 
