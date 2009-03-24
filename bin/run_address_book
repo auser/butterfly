@@ -1,4 +1,0 @@
-#!/usr/bin/sh ruby
-require "#{File.dirname(__FILE__)}/../lib/address_book"
-
-Thin::Server.start(*AddressBook::Server.new.start_opts)

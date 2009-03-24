@@ -1,5 +1,5 @@
 
-For more information on address_book, see http://address_book.rubyforge.org
+For more information on butterfly, see http://butterfly.rubyforge.org
 
 NOTE: Change this information in PostInstall.txt 
 You can also delete it if you don't want it.

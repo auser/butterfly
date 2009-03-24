@@ -1,4 +1,4 @@
-module AddressBook
+module Butterfly
   class Request
     attr_reader :env
     def initialize(env)

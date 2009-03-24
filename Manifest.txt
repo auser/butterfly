@@ -3,10 +3,10 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
-address_book.rb
-lib/address_book.rb
+butterfly.rb
+lib/butterfly.rb
 script/console
 script/destroy
 script/generate
-test/test_address_book.rb
+test/test_butterfly.rb
 test/test_helper.rb

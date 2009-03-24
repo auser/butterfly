@@ -1,7 +1,7 @@
 require "yaml"
 require "ostruct"
 
-module AddressBook
+module Butterfly
   class YamlFile < AdaptorBase
     attr_reader :data
     def initialize(o={})

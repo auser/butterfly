@@ -1,4 +1,4 @@
-module AddressBook
+module Butterfly
   class Server
     attr_reader :app
     def initialize(opts={})
@@ -10,7 +10,7 @@ module AddressBook
     end
     
     def adaptor
-      @adaptor ||= AddressBook.const_get("#{@adaptor_name}").new(@adaptor_opts)
+      @adaptor ||= Butterfly.const_get("#{@adaptor_name}").new(@adaptor_opts)
     end
     
     def start_opts

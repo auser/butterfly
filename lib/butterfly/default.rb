@@ -1,4 +1,4 @@
-module AddressBook
+module Butterfly
   class Default
     include Dslify
     

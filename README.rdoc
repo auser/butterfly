@@ -1,4 +1,4 @@
-= address_book
+= butterfly
 
 http://blog.xnot.org
 
@@ -20,7 +20,7 @@ A modular HTTP mini server to query against adaptors
 
 == INSTALL:
 
-* sudo gem install auser-address_book
+* sudo gem install auser-butterfly
 
 == LICENSE:
 

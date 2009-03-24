@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-class TestAddressBook < Test::Unit::TestCase
+class TestButterfly < Test::Unit::TestCase
 
   def setup
   end
