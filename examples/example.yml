@@ -1,0 +1,7 @@
+:server:
+  :name: localhost
+  :cpu: 0.3
+  :hostname: "503cpo"
+  :services:
+    :apache
+    :ssh
