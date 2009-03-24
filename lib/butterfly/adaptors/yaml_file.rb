@@ -9,9 +9,9 @@ module Butterfly
       @data = YAML::load(open(@file).read)
     end
     def get(req)
-      if data.has_key?(req.queries[0])
+      if data.has_key?(req.params[0])
         body = "", current_data = data        
-        req.queries.each do |param|
+        req.params.each do |param|
           current_data = current_data[param]
         end
         body = current_data.to_s
