@@ -2,7 +2,15 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module Butterfly
-  VERSION = '0.0.1'
+  VERSION = '0.0.1' unless Kernel.const_defined?("VERSION")
+  
+  def self.reload!
+    @reloading = true
+    butterfly_file = __FILE__
+    $LOADED_FEATURES.delete(butterfly_file)
+    ::Kernel.load butterfly_file
+    @reloading = false    
+  end
 end
 
 class Hash
