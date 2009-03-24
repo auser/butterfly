@@ -1,6 +1,7 @@
 module Butterfly
   class Server
-    attr_reader :app
+    attr_reader :app, :host, :port
+    attr_accessor :adaptor_name
     def initialize(opts={})
       @host = opts[:host] || Default.host
       @port = opts[:port] || Default.port
