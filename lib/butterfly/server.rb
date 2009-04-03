@@ -31,7 +31,7 @@ module Butterfly
       @request = Request.new env
       @response = Response.new @request
       
-      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response)
+      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response) rescue "Error"
       
       @response.return!(body)
     end
