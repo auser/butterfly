@@ -4,6 +4,9 @@ module Butterfly
     def initialize(env)
       @env = env
     end
+    def route_param
+      @route_param ||= params.shift
+    end
     def params
       @params ||= env["REQUEST_URI"].split("?")[0].split(".")[0].split("/").reject {|a| a.empty? }.map {|a| a.to_sym }
     end

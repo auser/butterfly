@@ -1,11 +1,11 @@
 require "json"
 
 module Butterfly
-  class JsonFile < AdaptorBase
+  class JsonFileAdaptor < AdaptorBase
     attr_reader :data
-    def initialize(o={})
-      @time_til_stale = o[:time_til_stale] || Default.time_til_stale
+    def initialize(o={})      
       @file = o[:file] + ".json"
+      super
     end
     def get(req, resp)
       if data.has_key?(req.params[0].to_s)

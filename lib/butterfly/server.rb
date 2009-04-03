@@ -3,15 +3,10 @@ module Butterfly
     attr_reader :app, :host, :port
     attr_accessor :adaptor_name
     def initialize(opts={})
-      @host = opts[:host] || Default.host
-      @port = opts[:port] || Default.port
-      @adaptor_name = opts[:adaptor] || Default.adaptor
-      @adaptor_opts = opts[:adaptor_opts] || Default.adaptor_opts
+      @host = opts.delete(:host) || Default.host
+      @port = opts.delete(:port) || Default.port
+      @adaptor_opts = Default.default_options[:adaptor_opts].merge(opts)
       @app = self
-    end
-    
-    def adaptor
-      @adaptor ||= Butterfly.const_get("#{@adaptor_name}").new(@adaptor_opts)
     end
 
     def start!
@@ -36,9 +31,13 @@ module Butterfly
       @request = Request.new env
       @response = Response.new @request
       
-      body = adaptor.send(:handle_call, @request, @response)
+      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response)
       
       @response.return!(body)
+    end
+    
+    def get_adaptor(p=Default.adaptor)
+      @adaptor ||= Butterfly.const_get("#{p.to_s.camel_case}Adaptor").new(@adaptor_opts)
     end
   end
 end

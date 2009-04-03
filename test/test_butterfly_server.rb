@@ -9,14 +9,6 @@ class TestButterflyServer < Test::Unit::TestCase
       @server.host.should == "0.0.0.0"
       @server.port.should == 10000
     end
-    it "should set the adaptor name" do
-      class Butterfly::Chickens
-        def initialize(opts={})          
-        end
-      end
-      @server.adaptor_name = "Chickens"
-      @server.adaptor.class.should == Butterfly::Chickens
-    end
     it "should respond to call (for rack)" do
       @server.respond_to?(:call).should == true
     end

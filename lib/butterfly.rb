@@ -27,6 +27,8 @@ end
   require lib
 end
 
+%w(string).each {|lib| require "#{File.dirname(__FILE__)}/butterfly/core/#{lib}" }
+
 %w(default adaptor_base response request server).each do |lib|
   require "#{File.dirname(__FILE__)}/butterfly/#{lib}"
 end

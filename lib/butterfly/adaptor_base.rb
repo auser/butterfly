@@ -22,6 +22,10 @@ module Butterfly
       self.send req.request_method, req, resp
     end
     
+    def initialize(o={})
+      @time_til_stale = o[:time_til_stale] || Default.time_til_stale
+    end
+    
     private
     def parse_path(env)
       env["REQUEST_URI"].gsub(/\//, '')
@@ -39,5 +43,5 @@ module Butterfly
 end
 
 %w(yaml_file json_file).each do |lib|
-  require "#{File.dirname(__FILE__)}/adaptors/#{lib}"
+  require "#{File.dirname(__FILE__)}/adaptors/#{lib}_adaptor"
 end
