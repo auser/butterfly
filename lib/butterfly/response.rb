@@ -22,7 +22,7 @@ module Butterfly
       when "json"
         body.to_json
       else
-        body
+        body.to_s
       end
     end
     def add_header(k,v)

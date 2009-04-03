@@ -5,13 +5,13 @@ module Butterfly
     attr_reader :data
     def initialize(o={})
       @time_til_stale = o[:time_til_stale] || Default.time_til_stale
-      @file = o[:file]
+      @file = o[:file] + ".json"
     end
     def get(req, resp)
-      if data.has_key?(req.params[0])
-        body = "", current_data = data        
+      if data.has_key?(req.params[0].to_s)
+        body = "", current_data = data  
         req.params.each do |param|
-          current_data = current_data[param]
+          current_data = current_data[param.to_s]
         end
         current_data
       else

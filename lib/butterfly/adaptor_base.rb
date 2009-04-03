@@ -38,6 +38,6 @@ module Butterfly
   end
 end
 
-%w(yaml_file).each do |lib|
+%w(yaml_file json_file).each do |lib|
   require "#{File.dirname(__FILE__)}/adaptors/#{lib}"
 end

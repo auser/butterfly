@@ -5,7 +5,7 @@ module Butterfly
     attr_reader :data
     def initialize(o={})
       @time_til_stale = o[:time_til_stale] || Default.time_til_stale
-      @file = o[:file]
+      @file = o[:file] + ".yml"
     end
     def get(req, resp)
       if data.has_key?(req.params[0])

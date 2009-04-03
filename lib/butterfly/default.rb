@@ -6,9 +6,9 @@ module Butterfly
       :host => "localhost",
       :port => 8081,
       :time_til_stale => 10, # 10 seconds between cache updates
-      :adaptor => "YamlFile",
+      :adaptor => "JsonFile",
       :adaptor_opts => {
-        :file => "#{File.dirname(__FILE__)}/../../examples/example.yml"
+        :file => "#{File.dirname(__FILE__)}/../../examples/example"
       }
     )
     
