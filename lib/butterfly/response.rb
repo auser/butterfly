@@ -18,6 +18,9 @@ module Butterfly
     def add_header(k,v)
       @headers[k] = v unless @headers.include?(k)
     end
+    def status
+      @status ||= 200
+    end
     def success!
       @status = 200
     end
