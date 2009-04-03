@@ -31,12 +31,12 @@ module Butterfly
       env["REQUEST_URI"].gsub(/\//, '')
     end
     def update_request!
-      reload! if (Time.now.to_i - last_loaded_at >= @time_til_stale)
+      reload_data! if (Time.now.to_i - last_loaded_at >= @time_til_stale)
     end
     def last_loaded_at
       @last_loaded_at ||= Time.now.to_i
     end
-    def reload!
+    def reload_data!
       @last_loaded_at = Time.now.to_i
     end
   end

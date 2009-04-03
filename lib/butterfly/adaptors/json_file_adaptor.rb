@@ -23,9 +23,9 @@ module Butterfly
     private
     
     def data
-      @data ||= reload!
+      @data ||= reload_data!
     end
-    def reload!
+    def reload_data!
       super 
       @data = JSON.parse(open(@file).read)
     end

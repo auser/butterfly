@@ -23,9 +23,9 @@ module Butterfly
     private
     
     def data
-      @data ||= reload!
+      @data ||= reload_data!
     end
-    def reload!
+    def reload_data!
       super 
       @data = YAML::load(open(@file).read)
     end

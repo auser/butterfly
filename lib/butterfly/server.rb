@@ -25,9 +25,7 @@ module Butterfly
       true
     end
     
-    def call(env)
-      reload! if should_reload?
-      
+    def call(env)      
       @request = Request.new env
       @response = Response.new @request
       
@@ -37,7 +35,11 @@ module Butterfly
     end
     
     def get_adaptor(p=Default.adaptor)
-      @adaptor ||= Butterfly.const_get("#{p.to_s.camel_case}Adaptor").new(@adaptor_opts)
+      adaptors[p] ||= Butterfly.const_get("#{p.to_s.camel_case}Adaptor").new(@adaptor_opts)
+    end
+    
+    def adaptors
+      @adaptors ||= {}
     end
   end
 end
