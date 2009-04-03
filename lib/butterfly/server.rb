@@ -29,7 +29,7 @@ module Butterfly
       @request = Request.new env
       @response = Response.new @request
       
-      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response) rescue "Error"
+      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response) rescue "Error: undefined adaptor for #{@request.route_param}"
       
       @response.return!(body)
     end

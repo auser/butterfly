@@ -8,16 +8,28 @@ module Butterfly
       super
     end
     def get(req, resp)
-      if data.has_key?(req.params[0].to_s)
-        body = "", current_data = data  
-        req.params.each do |param|
-          current_data = current_data[param.to_s]
+      if req.params
+        if data.has_key?(req.params[0].to_s)
+          body = "", current_data = data  
+          req.params.each do |param|
+            current_data = current_data[param.to_s]
+          end
+          current_data
+        else
+          resp.fail!
+          "Not found"
         end
-        current_data
       else
-        resp.fail!
-        "Not found"
+        data
       end
+    end
+    
+    def post(req, resp)
+      # @data = req.post_content
+      # File.open(@file, "w+") do |f|
+      #   
+      # end
+      req.post_content
     end
     
     private

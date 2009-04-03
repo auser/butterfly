@@ -13,21 +13,11 @@ module Butterfly
   end
 end
 
-class Hash
-  def method_missing(m,*a,&block)
-    if has_key?(m)
-      self[m]
-    else
-      super
-    end
-  end
-end
-
 %w(rubygems thin dslify).each do |lib|
   require lib
 end
 
-%w(string).each {|lib| require "#{File.dirname(__FILE__)}/butterfly/core/#{lib}" }
+%w(string hash).each {|lib| require "#{File.dirname(__FILE__)}/butterfly/core/#{lib}" }
 
 %w(default adaptor_base response request server).each do |lib|
   require "#{File.dirname(__FILE__)}/butterfly/#{lib}"
