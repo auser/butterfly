@@ -34,9 +34,9 @@ module Butterfly
       reload! if should_reload?
       
       @request = Request.new env
-      @response = Response.new env
+      @response = Response.new @request
       
-      body = adaptor.send(@request.request_method, @request, @response)
+      body = adaptor.send(:handle_call, @request, @response)
       
       @response.return!(body)
     end

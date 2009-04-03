@@ -1,7 +1,7 @@
-require "yaml"
+require "json"
 
 module Butterfly
-  class YamlFile < AdaptorBase
+  class JsonFile < AdaptorBase
     attr_reader :data
     def initialize(o={})
       @time_til_stale = o[:time_til_stale] || Default.time_til_stale
@@ -27,7 +27,7 @@ module Butterfly
     end
     def reload!
       super 
-      @data = YAML::load(open(@file).read)
+      @data = JSON.parse(open(@file).read)
     end
   end
 end

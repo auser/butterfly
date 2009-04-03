@@ -17,9 +17,23 @@ module Butterfly
       raise Exception.new("Your adaptor does not support delete")
     end
     
+    def handle_call(req, resp)
+      update_request!
+      self.send req.request_method, req, resp
+    end
+    
     private
     def parse_path(env)
       env["REQUEST_URI"].gsub(/\//, '')
+    end
+    def update_request!
+      reload! if (Time.now.to_i - last_loaded_at >= @time_til_stale)
+    end
+    def last_loaded_at
+      @last_loaded_at ||= Time.now.to_i
+    end
+    def reload!
+      @last_loaded_at = Time.now.to_i
     end
   end
 end

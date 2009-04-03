@@ -1,7 +1,7 @@
 :server:
   :name: localhost
-  :load: 0.3
-  :hostname: "503cpo"
+  :load: 0.10
+  :hostname: "amigos"
   :services:
     :apache
     :ssh
