@@ -2,7 +2,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module Butterfly
-  VERSION = '0.0.1' unless Kernel.const_defined?("VERSION")
+  VERSION = '0.0.1' unless Butterfly.const_defined?("VERSION")
   
   def self.reload!
     @reloading = true
@@ -27,6 +27,6 @@ end
   require lib
 end
 
-%w(default adaptor_base request server).each do |lib|
+%w(default adaptor_base response request server).each do |lib|
   require "#{File.dirname(__FILE__)}/butterfly/#{lib}"
 end

@@ -1,31 +1,25 @@
 module Butterfly
   class AdaptorBase
     
-    def get(env)
+    def get(req, resp)
       raise Exception.new("Your adaptor does not support get")
     end
     
-    def put(env)
+    def put(req, resp)
       raise Exception.new("Your adaptor does not support put")
     end
     
-    def post(env)
+    def post(req, resp)
       raise Exception.new("Your adaptor does not support post")
     end
     
-    def delete(env)
+    def delete(req, resp)
       raise Exception.new("Your adaptor does not support delete")
     end
     
     private
     def parse_path(env)
       env["REQUEST_URI"].gsub(/\//, '')
-    end
-    def success!
-      200
-    end
-    def fail!
-      404
     end
   end
 end

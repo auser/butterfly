@@ -17,5 +17,8 @@ class TestButterflyRequest < Test::Unit::TestCase
     it "should parse the query into 3 items when the path is /server/item/two" do
       Butterfly::Request.new(@env.merge("REQUEST_URI" => "/server/item/two")).params.should == [:server, :item, :two]
     end
+    it "should not explode with a ?" do
+      Butterfly::Request.new(@env.merge("REQUEST_URI" => "/server/item/two?pop=dance")).params.should == [:server, :item, :two]
+    end
   end
 end

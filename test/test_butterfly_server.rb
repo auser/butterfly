@@ -17,11 +17,6 @@ class TestButterflyServer < Test::Unit::TestCase
       @server.adaptor_name = "Chickens"
       @server.adaptor.class.should == Butterfly::Chickens
     end
-    it "should have start_opts as an array of 3 items with the host, port, app" do
-      @server.start_opts.class.should == Array
-      @server.start_opts.size.should == 3
-      @server.start_opts.should == ["0.0.0.0", 10000, @server]
-    end
     it "should respond to call (for rack)" do
       @server.respond_to?(:call).should == true
     end

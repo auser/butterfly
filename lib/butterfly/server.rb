@@ -13,7 +13,7 @@ module Butterfly
     def adaptor
       @adaptor ||= Butterfly.const_get("#{@adaptor_name}").new(@adaptor_opts)
     end
-        
+
     def start!
       Thin::Server.start(@host, @port, app)
     end
@@ -31,12 +31,14 @@ module Butterfly
     end
     
     def call(env)
-      reload!
+      reload! if should_reload?
       
-      @request = Request.new env      
-      status, headers, response = adaptor.send(@request.request_method, @request)
+      @request = Request.new env
+      @response = Response.new env
       
-      [status, headers, response]
+      body = adaptor.send(@request.request_method, @request, @response)
+      
+      @response.return!(body)
     end
   end
 end

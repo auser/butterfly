@@ -7,16 +7,13 @@ module Butterfly
       :port => 8081,
       :adaptor => "YamlFile",
       :adaptor_opts => {
-        :file => "examples/example.yml"
+        :file => "#{File.dirname(__FILE__)}/../../examples/example.yml"
       }
     )
     
     def self.method_missing(m,*a,&block)
-      if default_options.include?(m)
-        default_options[m]
-      else
-        super
-      end
+      default_options.include?(m) ? default_options[m] : super
     end
+    
   end
 end
