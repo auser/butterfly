@@ -20,5 +20,27 @@ class TestButterflyRequest < Test::Unit::TestCase
     it "should not explode with a ?" do
       Butterfly::Request.new(@env.merge("REQUEST_URI" => "/server/item/two?pop=dance")).params.should == [:server, :item, :two]
     end
+    it "should pull out the post data when post_data is sent" do
+      Butterfly::Request.new(@env.merge("rack.input" => "fly away")).post_data.should == "fly away"
+    end
+    it "should pull out the post data param to map the response" do
+      @req = Butterfly::Request.new(@env.merge("REQUEST_URI" => "/server/item"))
+      @req.route_param.should == :server
+      @req.params.include?(:server).should == false
+    end
+    context "request type" do
+      it "should be :get when REQUEST_METHOD == GET" do
+        Butterfly::Request.new(@env.merge("REQUEST_METHOD" => "GET")).request_method.should == :get
+      end
+      it "should be :get when REQUEST_METHOD == POST" do
+        Butterfly::Request.new(@env.merge("REQUEST_METHOD" => "POST")).request_method.should == :post
+      end
+      it "should be :get when REQUEST_METHOD == PUT" do
+        Butterfly::Request.new(@env.merge("REQUEST_METHOD" => "PUT")).request_method.should == :put
+      end
+      it "should be :get when REQUEST_METHOD == DELETE" do
+        Butterfly::Request.new(@env.merge("REQUEST_METHOD" => "DELETE")).request_method.should == :delete
+      end
+    end
   end
 end
