@@ -20,7 +20,7 @@ module Butterfly
       env["REQUEST_METHOD"].downcase.to_sym
     end
     def request_type
-      env["REQUEST_URI"].split(".")[-1] rescue nil
+      env["REQUEST_URI"].split(".")[-1] rescue env["CONTENT_TYPE"] || nil
     end
   end
 end

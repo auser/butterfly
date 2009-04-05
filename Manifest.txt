@@ -9,8 +9,11 @@ examples/example.json
 examples/example.yml
 lib/butterfly.rb
 lib/butterfly/adaptor_base.rb
+lib/butterfly/adaptors/favicon_adaptor.rb
 lib/butterfly/adaptors/json_file_adaptor.rb
 lib/butterfly/adaptors/yaml_file_adaptor.rb
+lib/butterfly/client.rb
+lib/butterfly/core/hash.rb
 lib/butterfly/core/string.rb
 lib/butterfly/default.rb
 lib/butterfly/request.rb
@@ -19,6 +22,9 @@ lib/butterfly/server.rb
 script/console
 script/destroy
 script/generate
+test/test_adapter_base.rb
 test/test_butterfly_request.rb
+test/test_butterfly_response.rb
 test/test_butterfly_server.rb
+test/test_default.rb
 test/test_helper.rb

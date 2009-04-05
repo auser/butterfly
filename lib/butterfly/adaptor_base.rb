@@ -1,5 +1,6 @@
 module Butterfly
   class AdaptorBase
+    attr_reader :data
     
     def get(req, resp)
       raise Exception.new("Your adaptor does not support get")
@@ -38,6 +39,9 @@ module Butterfly
     end
     def reload_data!
       @last_loaded_at = Time.now.to_i
+    end
+    def data
+      @data ||= reload_data!
     end
   end
 end

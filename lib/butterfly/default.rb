@@ -7,6 +7,7 @@ module Butterfly
         :port => 8081,
         :time_til_stale => 10, # 10 seconds between cache updates
         :adaptor => "JsonFile",
+        :env => :development,
         :adaptor_opts => {
           :file => "#{File.dirname(__FILE__)}/../../examples/example"
         }
