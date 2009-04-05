@@ -11,7 +11,7 @@ module Butterfly
     end
 
     def start!
-      Thin::Server.start(@host, @port, app)
+      at_exit {Thin::Server.start(@host, @port, app)}
     end
 
     def reload!
