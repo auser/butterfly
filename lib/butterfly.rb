@@ -15,7 +15,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 module Butterfly
   VERSION = '0.0.2' unless Butterfly.const_defined?("VERSION")
   
-  def self.adaptor_file *files
+  def self.register_adaptor *files
     files.each do |a| 
       fpath = File.expand_path(a.index(".rb") ? a : "#{a}.rb")
       LOADED_FILES << fpath 
