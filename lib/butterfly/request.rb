@@ -5,7 +5,7 @@ module Butterfly
       @env = env
     end
     def route_param
-      @route_param ||= params.shift
+      @route_param ||= params.empty? ? nil : params.shift
     end
     def post_data
       @post_data ||= env["rack.input"]

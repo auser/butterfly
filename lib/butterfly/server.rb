@@ -31,13 +31,17 @@ module Butterfly
       @request = Request.new env
       @response = Response.new @request
       
-      body = get_adaptor(@request.route_param).send(:handle_call, @request, @response)
-      
+      body = begin
+        get_adaptor(@request.route_param).send(:handle_call, @request, @response)
+      rescue Exception => e
+        @response.fail!
+        "Boom"        
+      end
       @response.return!(body)
     end
     
     def get_adaptor(p=Default.adaptor)
-      adaptors[p] ||= Butterfly.const_get("#{p.to_s.camel_case}Adaptor").new(@adaptor_opts) rescue "Error: undefined adaptor for #{@request.route_param}"
+      adaptors[p] ||= Butterfly.const_get("#{p.to_s.camel_case}Adaptor").new(@adaptor_opts) #rescue raise "Error: undefined adaptor for #{@request.route_param}"
     end
     
     def adaptors
