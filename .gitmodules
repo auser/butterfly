@@ -1,0 +1,3 @@
+[submodule "vendor/gems/reloadable"]
+	path = vendor/gems/reloadable
+	url = git://github.com/auser/reloadable.git

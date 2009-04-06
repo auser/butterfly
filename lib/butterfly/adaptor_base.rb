@@ -1,3 +1,11 @@
+=begin rdoc
+  Base AdaptorBase. 
+  
+  This is the base that adaptors subclass. It contains the 4 methods (get, put, post, delete) that adaptors
+  can receive. It also handles the calling for the adaptors. Before it calls, however, it will call update_request!
+  which will call reload_data! to give basic caching, which is inherited on data. To gain access to the reload method,
+  simply overwrite reload_data! (but be sure to call super)
+=end
 module Butterfly
   class AdaptorBase
     attr_reader :data
