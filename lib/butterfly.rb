@@ -1,18 +1,14 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-%w(reloadable).each do |lib|
-  $:.unshift("#{File.dirname(__FILE__)}/../vendor/gems/#{lib}")
-end
-
-%w(rubygems thin dslify lib/reloadable rack/cache).each do |lib|
+%w(rubygems thin dslify rack/cache).each do |lib|
   require lib
 end
 
 LOADED_FILES = []
 
 [
-    "core/string", "core/hash",
+    "core/string", "core/hash", "reloadable",
     "default", "adaptor_base", "response", "request", "server"
 ].map {|lib| require "#{File.dirname(__FILE__)}/butterfly/#{lib}" }
   
