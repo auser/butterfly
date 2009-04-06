@@ -1,6 +1,9 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-$:.unshift("#{File.dirname(__FILE__)}/../vendor/gems")
+
+%w(reloadable).each do |lib|
+  $:.unshift("#{File.dirname(__FILE__)}/../vendor/gems/#{lib}")
+end
 
 %w(rubygems thin dslify lib/reloadable rack/cache).each do |lib|
   require lib
@@ -16,7 +19,7 @@ LOADED_FILES = []
 module Butterfly
   include Reloadable
   
-  VERSION = '0.0.2' unless Butterfly.const_defined?("VERSION")
+  VERSION = '0.0.3' unless Butterfly.const_defined?("VERSION")
   
   def self.register_adaptor *files
     files.each {|f| require_reloadable_files f }
