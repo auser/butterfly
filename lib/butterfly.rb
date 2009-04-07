@@ -1,7 +1,7 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-%w(rubygems thin rack/cache).each do |lib|
+%w(rubygems thin).each do |lib|
   require lib
 end
 

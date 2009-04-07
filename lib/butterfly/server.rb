@@ -37,7 +37,7 @@ module Butterfly
         @response.fail!
         "Boom"        
       end
-      @response.return!(body)
+      return @response.return!(body)      
     end
     
     def get_adaptor(p=Default.adaptor)
