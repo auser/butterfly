@@ -54,6 +54,6 @@ module Butterfly
   end
 end
 
-%w(yaml_file json_file).each do |lib|
+%w(yaml_file json_file favicon).each do |lib|
   require "#{File.dirname(__FILE__)}/adaptors/#{lib}_adaptor"
 end
