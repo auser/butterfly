@@ -2,9 +2,9 @@ module Butterfly
   class Server
     attr_reader :app, :host, :port, :env
     attr_accessor :adaptor_name
-    def initialize(opts={})
-      @host = opts.delete(:host) || Default.host
-      @port = opts.delete(:port) || Default.port
+    def initialize(host=nil, port=nil, opts={})
+      @host = host || Default.host
+      @port = port || Default.port
       @env = opts.delete(:env) || Default.env
       @adaptor_opts = Default.default_options[:adaptor_opts].merge(opts)
       @app = self
@@ -15,7 +15,8 @@ module Butterfly
     end
     
     def start(opts={})
-      Thin::Server.start(@host, @port, @app, opts )
+      t_opts = {:port=>@port, :host=>@host}.merge(opts)
+      at_exit {Thin::Controllers::Controller.new(t_opts).start(@app)}
     end
 
     def reload!
@@ -41,7 +42,7 @@ module Butterfly
         puts error_message = "Boom!  could not find Butterfly::#{@request.route_param.to_s.camel_case}Adaptor #{e.inspect}"
         error_message
       end
-      return @response.return!(body)      
+      return @response.return!(body)
     end
     
     def get_adaptor(p=Default.adaptor)
