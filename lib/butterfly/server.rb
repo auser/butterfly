@@ -3,8 +3,8 @@ module Butterfly
     attr_reader :app, :host, :port, :env
     attr_accessor :adaptor_name
     def initialize(host=nil, port=nil, opts={})
-      @host = host || Default.host
-      @port = port || Default.port
+      @host = (host.is_a?(Hash) ? host[:host] : host) || Default.host
+      @port = (host.is_a?(Hash) ? host[:port] : port) || Default.port
       @env = opts.delete(:env) || Default.env
       @adaptor_opts = Default.default_options[:adaptor_opts].merge(opts)
       @app = self
