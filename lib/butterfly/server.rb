@@ -13,6 +13,10 @@ module Butterfly
     def start!
       at_exit {Thin::Server.start(@host, @port, app)}
     end
+    
+    def start(opts={})
+      Thin::Server.start(@host, @port, @app, opts )
+    end
 
     def reload!
       Butterfly.reload!
@@ -30,12 +34,12 @@ module Butterfly
       reload! if should_reload?
       @request = Request.new env
       @response = Response.new @request
-      
       body = begin
-        get_adaptor(@request.route_param).send(:handle_call, @request, @response)
+        get_adaptor(@request.route_param).send(:handle_call, @request, @response) rescue get_adaptor(@request.route_param).send(@request.params.first.to_sym, @request, @response)  #TODO:refactor this
       rescue Exception => e
         @response.fail!
-        "Boom"        
+        puts error_message = "Boom!  could not find Butterfly::#{@request.route_param.to_s.camel_case}Adaptor #{e.inspect}"
+        error_message
       end
       return @response.return!(body)      
     end
