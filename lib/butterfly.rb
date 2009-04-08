@@ -15,7 +15,7 @@ LOADED_FILES = []
 module Butterfly
   include Reloadable
   
-  VERSION = '0.0.4' unless Butterfly.const_defined?("VERSION")
+  VERSION = '0.0.5' unless Butterfly.const_defined?("VERSION")
   
   def self.register_adaptor *files
     files.each {|f| require_reloadable_files f }
