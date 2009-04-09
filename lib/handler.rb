@@ -16,5 +16,9 @@ module Butterfly
       
     end
     
+    def route_params(env)
+      @route_params ||= env["REQUEST_URI"]
+    end
+    
   end
 end
