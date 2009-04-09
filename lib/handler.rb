@@ -8,16 +8,20 @@ module Butterfly
     def call env
       status, headers, body = @app.call env
       
+      req, resp = request_and_response(env)      
+      
       begin
-        Butterfly.const_get("")
+        new_body = Butterfly.const_get(req.route_param).to_s
       rescue Exception => e
-        
+        new_body = "Error: #{e}"
       end
       
+      [status, headers, new_body]
     end
     
-    def route_params(env)
-      @route_params ||= env["REQUEST_URI"]
+    def request_and_response(env)
+      req = Request.new(env)      
+      [req, Response.new(req)]
     end
     
   end

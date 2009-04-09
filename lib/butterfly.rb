@@ -5,6 +5,4 @@ $:.unshift(File.dirname(__FILE__)) unless
   
 module Butterfly  
   VERSION = '0.0.5' unless Butterfly.const_defined?("VERSION")
-  
-  
 end
