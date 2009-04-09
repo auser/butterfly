@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = %q{arilerner@mac.com}
   s.executables = ["flutter"]
   s.extra_rdoc_files = ["README.rdoc"]
-  s.files = ["History.txt", "PostInstall.txt", "Rakefile", "README.rdoc", "VERSION.yml", "bin/flutter", "examples/example.json", "examples/example.yml", "lib/butterfly.rb", "lib/handler.rb", "lib/request.rb", "lib/response.rb", "test/test_adapter_base.rb", "test/test_butterfly_request.rb", "test/test_butterfly_response.rb", "test/test_butterfly_server.rb", "test/test_default.rb", "test/test_helper.rb", ".gitignore"]
+  s.files = ["History.txt", "PostInstall.txt", "Rakefile", "README.rdoc", "VERSION.yml", "bin/flutter", "examples/config.ru", "examples/my_app.rb", "lib/butterfly.rb", "lib/handler.rb", "lib/request.rb", "lib/response.rb", "test/test_adapter_base.rb", "test/test_butterfly_request.rb", "test/test_butterfly_response.rb", "test/test_butterfly_server.rb", "test/test_default.rb", "test/test_helper.rb", ".gitignore"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/auser/butterfly}
   s.post_install_message = %q{PostInstall.txt}
