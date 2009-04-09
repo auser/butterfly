@@ -3,6 +3,7 @@ module Butterfly
 
     def initialize(app, o={})
       @app = app
+      @module_space = o[:module] || Kernel
       @ops = o
     end
     def call env
@@ -32,9 +33,9 @@ module Butterfly
     def get_const(req)
       route_param = req.route_param.to_s.camelcase.to_sym
       begin
-        klass = Kernel.const_get(route_param)
+        klass = @module_space.const_get(route_param)
       rescue Exception => e
-        Kernel.const_get(route_param)
+        @module_space.const_get(route_param)
       end      
     end
     

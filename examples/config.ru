@@ -7,7 +7,7 @@ app = Rack::Builder.new {
   use Rack::Reloader
   use Rack::CommonLogger
   
-  use Butterfly::Handler
+  use Butterfly::Handler, :module => Buts
   
   run lambda {|env| [404, {}, "uh oh"]}
 }
