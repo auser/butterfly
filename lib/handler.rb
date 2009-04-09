@@ -10,10 +10,11 @@ module Butterfly
       
       req, resp = request_and_response(env)      
       
-      begin
-        new_body = Butterfly.const_get(req.route_param).to_s
-      rescue Exception => e
-        new_body = "Error: #{e}"
+      new_body = if req.route_param
+        konst = Kernel.const_get(req.route_param.to_s.camelcase.to_sym)
+        konst.send(:new).send req.request_method, req, resp
+      else
+        "boom"
       end
       
       [status, headers, new_body]
