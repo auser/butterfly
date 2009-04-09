@@ -3,7 +3,7 @@ module Butterfly
 
     def initialize(app, o={})
       @app = app
-      @module_space = o[:module] || Kernel
+      @module_space = o.delete(:module) || Kernel
       @ops = o
     end
     def call env
@@ -22,7 +22,7 @@ module Butterfly
     end
     
     def try_handle(konst, req, resp)
-      inst = konst.send(:new)
+      inst = konst.send(:new, @ops)
       if inst.respond_to?(req.meth_param)
         inst.send(req.meth_param, req, resp)
       else
