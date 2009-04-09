@@ -14,7 +14,8 @@ module Butterfly
         konst = Kernel.const_get(req.route_param.to_s.camelcase.to_sym)
         konst.send(:new).send req.request_method, req, resp
       else
-        "boom"
+        status = 500
+        new_body = body
       end
       
       [status, headers, new_body]

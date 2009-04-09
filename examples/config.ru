@@ -8,8 +8,8 @@ app = Rack::Builder.new {
   use Rack::CommonLogger
   
   use Butterfly::Handler
-    
-  run lambda {|env| [200, {}, "uh oh"]}
+  
+  run lambda {|env| [404, {}, "uh oh"]}
 }
 
 run app
