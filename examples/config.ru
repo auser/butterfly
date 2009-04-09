@@ -1,6 +1,6 @@
 require "rubygems"
-require "/Users/alerner/Development/ruby/mine/butterfly/lib/butterfly"
-require "my_app"
+require "#{File.dirname(__FILE__)}/../lib/butterfly"
+require "#{File.dirname(__FILE__)}/my_app"
 
 app = Rack::Builder.new {
   use Rack::ShowExceptions
