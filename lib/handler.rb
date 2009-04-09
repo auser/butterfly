@@ -8,17 +8,34 @@ module Butterfly
     def call env
       status, headers, body = @app.call env
       
-      req, resp = request_and_response(env)      
+      req, resp = request_and_response(env)
       
-      new_body = if req.route_param
-        konst = Kernel.const_get(req.route_param.to_s.camelcase.to_sym)
-        konst.send(:new).send req.request_method, req, resp
-      else
-        status = 500
-        new_body = body
+      body = begin
+        konst = get_const(req)
+        resp.return! try_handle(konst, req, resp)
+      rescue Exception => e
+        resp.fail!
+        error_message = "Boom!  could not find Butterfly::#{req.route_param.to_s.camelcase} #{e.inspect}"
+        resp.return!(error_message)
       end
-      
-      [status, headers, new_body]
+    end
+    
+    def try_handle(konst, req, resp)
+      inst = konst.send(:new)
+      if inst.respond_to?(req.meth_param)
+        inst.send(req.meth_param, req, resp)
+      else
+        inst.send(req.request_method, req, resp)
+      end      
+    end
+    
+    def get_const(req)
+      route_param = req.route_param.to_s.camelcase.to_sym
+      begin
+        klass = Kernel.const_get(route_param)
+      rescue Exception => e
+        Kernel.const_get(route_param)
+      end      
     end
     
     def request_and_response(env)

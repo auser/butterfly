@@ -7,6 +7,9 @@ module Butterfly
     def route_param
       @route_param ||= params.empty? ? nil : params.shift
     end
+    def meth_param
+      @meth_param ||= params.empty? ? :index : params.shift
+    end
     def post_data
       @post_data ||= env["rack.input"]
     end
