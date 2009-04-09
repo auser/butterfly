@@ -42,7 +42,20 @@ module Butterfly
         puts error_message = "Boom!  could not find Butterfly::#{@request.route_param.to_s.camel_case}Adaptor #{e.inspect}"
         error_message
       end
-      return @response.return!(body)
+      
+      wrap_in_after_return do
+        @response.return!(body)
+      end
+      
+    end
+    
+    def wrap_in_after_return &block
+      a = block.call(self)
+      after_return
+      a
+    end
+    
+    def after_return      
     end
     
     def get_adaptor(p=Default.adaptor)
