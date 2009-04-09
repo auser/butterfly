@@ -36,26 +36,24 @@ module Butterfly
       @request = Request.new env
       @response = Response.new @request
       body = begin
-        get_adaptor(@request.route_param).send(:handle_call, @request, @response) rescue get_adaptor(@request.route_param).send(@request.params.first.to_sym, @request, @response)  #TODO:refactor this
+        adapter = get_adaptor(@request.route_param)
+        adapter.send(:handle_call, @request, @response) rescue get_adaptor(@request.route_param).send(@request.params.first.to_sym, @request, @response)  #TODO:refactor this
+        
+        wrap_in_after_return adapter do
+          @response.return!(body)
+        end
       rescue Exception => e
         @response.fail!
         puts error_message = "Boom!  could not find Butterfly::#{@request.route_param.to_s.camel_case}Adaptor #{e.inspect}"
         error_message
       end
       
-      wrap_in_after_return do
-        @response.return!(body)
-      end
-      
     end
     
-    def wrap_in_after_return &block
+    def wrap_in_after_return adapter, &block
       a = block.call(self)
-      after_return
+      adapter.after_return
       a
-    end
-    
-    def after_return      
     end
     
     def get_adaptor(p=Default.adaptor)

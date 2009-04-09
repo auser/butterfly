@@ -31,6 +31,9 @@ module Butterfly
       self.send req.request_method, req, resp
     end
     
+    def after_return
+    end
+    
     def initialize(o={})
       @time_til_stale = o[:time_til_stale] || Default.time_til_stale
     end
